@@ -1,0 +1,17 @@
+{
+  "name": "data-forge-performance-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "mode index.js"
+  },
+  "keywords": [],
+  "author": "Ashley Davis <ashley@codecapers.com.au>",
+  "license": "MIT",
+  "dependencies": {
+    "data-forge": "1.2.3",
+    "moment": "2.22.2",
+    "statman-stopwatch": "2.7.0"
+  }
+}
