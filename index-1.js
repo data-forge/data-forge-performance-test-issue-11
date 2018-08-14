@@ -86,4 +86,4 @@ const data = [
   console.log('smaSeries', smaSeries.toArray());
 
 stopwatch.stop();
-console.log("Time: " + stopwatch.read());
+console.log("Time [1]: " + stopwatch.read());
