@@ -7,6 +7,7 @@ const moment = require('moment');
 stopwatch.stop();
 console.log("Time to require: " + stopwatch.read());
 
+stopwatch.start();
 const data = [
     { date: moment().toDate(), value: 1 },
     { date: moment().add(1, 'days').toDate(), value: 3 },
@@ -69,13 +70,15 @@ const gapFiller = (pairA, pairB) => {
   return newEntries;
 };
 
-stopwatch.start();
 const dfWithoutGaps = df.fillGaps(gapExists, gapFiller);
 
 // START OF KEY PART
 const mySeries = dfWithoutGaps.getSeries('value');
 // END OF KEY PART
+stopwatch.stop();
+console.log("Time to create DataFrame and getSeries: " + stopwatch.read());
 
+stopwatch.start();
 const smaPeriod = 3;
 const smaSeries = mySeries
   .rollingWindow(smaPeriod)
@@ -84,4 +87,4 @@ const smaSeries = mySeries
 smaSeries.toArray()
 
 stopwatch.stop();
-console.log("Time for fillGap and getting the series: " + stopwatch.read());
+console.log("Time for rolling window and toArray(): " + stopwatch.read());
