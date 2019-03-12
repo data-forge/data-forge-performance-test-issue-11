@@ -8,35 +8,10 @@ stopwatch.stop();
 console.log("Time to require: " + stopwatch.read());
 
 stopwatch.start();
-const data = [
-    { date: moment().toDate(), value: 1 },
-    { date: moment().add(1, 'days').toDate(), value: 3 },
-    { date: moment().add(5, 'days').toDate(), value: 2 },
-    { date: moment().add(6, 'days').toDate(), value: 6 },
-    { date: moment().add(7, 'days').toDate(), value: 5 },
-    { date: moment().add(12, 'days').toDate(), value: 2 },
-    { date: moment().add(15, 'days').toDate(), value: 9 },
-    { date: moment().add(16, 'days').toDate(), value: 9 },
-    { date: moment().add(17, 'days').toDate(), value: 9 },
-    { date: moment().add(18, 'days').toDate(), value: 9 },
-    { date: moment().add(19, 'days').toDate(), value: 9 },
-    { date: moment().add(30, 'days').toDate(), value: 9 },
-    { date: moment().add(31, 'days').toDate(), value: 9 },
-    { date: moment().add(32, 'days').toDate(), value: 9 },
-    { date: moment().add(33, 'days').toDate(), value: 9 },
-    { date: moment().add(34, 'days').toDate(), value: 9 },
-    { date: moment().add(35, 'days').toDate(), value: 9 },
-    { date: moment().add(36, 'days').toDate(), value: 9 },
-    { date: moment().add(37, 'days').toDate(), value: 9 },
-    { date: moment().add(38, 'days').toDate(), value: 9 },
-    { date: moment().add(39, 'days').toDate(), value: 9 },
-    { date: moment().add(40, 'days').toDate(), value: 9 },
-    { date: moment().add(41, 'days').toDate(), value: 9 },
-    { date: moment().add(42, 'days').toDate(), value: 9 },
-    { date: moment().add(50, 'days').toDate(), value: 9 },
-    { date: moment().add(51, 'days').toDate(), value: 9 },
-    { date: moment().add(52, 'days').toDate(), value: 9 },
-];
+const data = [];
+for (let i = 0; i < 100; i += 1) {
+  data.push({ date: moment().add(i, 'days').toDate(), value: i });
+}
 const df = new dataForge.DataFrame(data).setIndex('date');
 
 const gapExists = (pairA, pairB) => {
@@ -79,12 +54,24 @@ stopwatch.stop();
 console.log("Time to create DataFrame and getSeries: " + stopwatch.read());
 
 stopwatch.start();
+df.toPairs();
+stopwatch.stop();
+console.log("df.toPairs: " + stopwatch.read());
+
+stopwatch.start();
+dfWithoutGaps.toPairs();
+stopwatch.stop();
+console.log("dfWithoutGaps.toPairs: " + stopwatch.read());
+
+stopwatch.start();
 const smaPeriod = 3;
 const smaSeries = mySeries
   .rollingWindow(smaPeriod)
-  .select(window => window.sum() / smaPeriod);
-
-smaSeries.toArray()
-
+  .select(window => val = window.sum() / smaPeriod);
 stopwatch.stop();
-console.log("Time for rolling window and toArray(): " + stopwatch.read());
+console.log("Time for rolling window: " + stopwatch.read());
+
+stopwatch.start();
+smaSeries.toPairs();
+stopwatch.stop();
+console.log("Time for toPairs: " + stopwatch.read());
