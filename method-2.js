@@ -7,8 +7,6 @@ const moment = require('moment');
 stopwatch.stop();
 console.log("Time to require: " + stopwatch.read());
 
-stopwatch.start();
-
 const data = [
     { date: moment().toDate(), value: 1 },
     { date: moment().add(1, 'days').toDate(), value: 3 },
@@ -71,8 +69,8 @@ const gapFiller = (pairA, pairB) => {
   return newEntries;
 };
 
+stopwatch.start();
 const dfWithoutGaps = df.fillGaps(gapExists, gapFiller);
-// console.log('dfWithoutGaps', dfWithoutGaps.toArray());
 
 // START OF KEY PART
 const mySeries = new dataForge.Series(dfWithoutGaps.getSeries('value').toArray());
@@ -83,7 +81,7 @@ const smaSeries = mySeries
   .rollingWindow(smaPeriod)
   .select(window => window.sum() / smaPeriod);
 
-// console.log('smaSeries', smaSeries.toArray());
+smaSeries.toArray()
 
 stopwatch.stop();
-console.log("Time for everything else: " + stopwatch.read());
+console.log("Time for fillGap and getting the series: " + stopwatch.read());

@@ -10,8 +10,8 @@
   "author": "Ashley Davis <ashley@codecapers.com.au>",
   "license": "MIT",
   "dependencies": {
-    "data-forge": "1.2.3",
-    "moment": "2.22.2",
+    "data-forge": "1.4.7",
+    "moment": "2.24.0",
     "statman-stopwatch": "2.7.0"
   }
 }
