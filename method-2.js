@@ -54,16 +54,6 @@ stopwatch.stop();
 console.log("Time to create DataFrame and getSeries: " + stopwatch.read());
 
 stopwatch.start();
-df.toPairs();
-stopwatch.stop();
-console.log("df.toPairs: " + stopwatch.read());
-
-stopwatch.start();
-dfWithoutGaps.toPairs();
-stopwatch.stop();
-console.log("dfWithoutGaps.toPairs: " + stopwatch.read());
-
-stopwatch.start();
 const smaPeriod = 3;
 const smaSeries = mySeries
   .rollingWindow(smaPeriod)
